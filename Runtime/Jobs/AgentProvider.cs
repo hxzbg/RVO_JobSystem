@@ -42,10 +42,10 @@ namespace Nebukam.ORCA
         public AxisPair plane { get; set; } = AxisPair.XY;
 
         protected IAgentGroup<IAgent> m_agents = null;
-        public IAgentGroup<IAgent> agents 
-        { 
-            get { return m_agents; } 
-            set { m_agents = value; } 
+        public IAgentGroup<IAgent> agents
+        {
+            get { return m_agents; }
+            set { m_agents = value; }
         }
 
         internal List<Agent> m_lockedAgents = new List<Agent>();
@@ -56,7 +56,7 @@ namespace Nebukam.ORCA
 
         protected float m_maxRadius = 0f;
         public float maxRadius { get { return m_maxRadius; } }
-                
+
 
         protected override void InternalLock()
         {
@@ -87,7 +87,7 @@ namespace Nebukam.ORCA
                 for (int i = 0; i < agentCount; i++)
                 {
                     a = m_lockedAgents[i];
-                    m_maxRadius = max(m_maxRadius , a.radius);
+                    m_maxRadius = max(m_maxRadius, a.radius);
                     pos = a.pos;
                     prefVel = a.m_prefVelocity;
                     vel = a.m_velocity;
@@ -96,6 +96,7 @@ namespace Nebukam.ORCA
                         index = i,
                         kdIndex = i,
                         position = float2(pos.x, pos.y), //
+                        targetPosition = float2(a.m_targetPosition.x, a.m_targetPosition.y),
                         worldPosition = pos,
                         baseline = pos.z,
                         prefVelocity = float2(prefVel.x, prefVel.y),
@@ -113,7 +114,9 @@ namespace Nebukam.ORCA
                         navigationEnabled = a.m_navigationEnabled,
                         collisionEnabled = a.m_collisionEnabled,
                         layerOccupation = a.m_layerOccupation,
-                        layerIgnore = a.m_layerIgnore
+                        layerIgnore = a.m_layerIgnore,
+                        rendererIndex = a.rendererIndex,
+                        animationIndex = a.animationIndex
                     };
                 }
             }
@@ -130,6 +133,7 @@ namespace Nebukam.ORCA
                     {
                         index = i,
                         position = float2(pos.x, pos.z), //
+                        targetPosition = float2(a.m_targetPosition.x, a.m_targetPosition.z),
                         worldPosition = pos,
                         baseline = pos.y,
                         prefVelocity = float2(prefVel.x, prefVel.z),
@@ -147,7 +151,9 @@ namespace Nebukam.ORCA
                         navigationEnabled = a.m_navigationEnabled,
                         collisionEnabled = a.m_collisionEnabled,
                         layerOccupation = a.m_layerOccupation,
-                        layerIgnore = a.m_layerIgnore
+                        layerIgnore = a.m_layerIgnore,
+                        rendererIndex = a.rendererIndex,
+                        animationIndex = a.animationIndex
                     };
                 }
             }

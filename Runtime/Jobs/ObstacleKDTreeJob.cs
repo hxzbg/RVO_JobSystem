@@ -41,7 +41,7 @@ namespace Nebukam.ORCA
         public NativeArray<ObstacleVertexData> m_referenceObstacles;
         public NativeArray<ObstacleVertexData> m_inputObstacles;
         public NativeArray<ObstacleTreeNode> m_outputTree;
-
+        [BurstCompile]
         public void Execute()
         {
 
@@ -131,7 +131,7 @@ namespace Nebukam.ORCA
                 {
                     ++leftSize;
                     ++left;
-                    ++right;
+                    //++right;
                 }
 
                 treeNode.left = node + 1;

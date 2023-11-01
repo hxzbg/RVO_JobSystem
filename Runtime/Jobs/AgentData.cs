@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using Unity.Burst;
 using Unity.Mathematics;
 
@@ -28,14 +29,20 @@ namespace Nebukam.ORCA
     /// Job-friendly Agent data.
     /// </summary>
     [BurstCompile]
+    [Serializable]
     public struct AgentData
     {
+        [UnityEngine.HideInInspector]
         public int index;
+        [UnityEngine.HideInInspector]
         public int kdIndex;
-
+        [UnityEngine.HideInInspector]
         public float2 position;
+        [UnityEngine.HideInInspector]
         public float baseline;
+        [UnityEngine.HideInInspector]
         public float2 prefVelocity;
+        [UnityEngine.HideInInspector]
         public float2 velocity;
 
         public float height;
@@ -45,6 +52,7 @@ namespace Nebukam.ORCA
 
         public int maxNeighbors;
         public float neighborDist;
+        [UnityEngine.HideInInspector]
         public float neighborElev;
 
         public float timeHorizon;
@@ -54,9 +62,18 @@ namespace Nebukam.ORCA
         public ORCALayer layerIgnore;
         public bool navigationEnabled;
         public bool collisionEnabled;
-
+        [UnityEngine.HideInInspector]
         public float3 worldPosition;
+        [UnityEngine.HideInInspector]
         public float3 worldVelocity;
+        [UnityEngine.HideInInspector]
+        public quaternion worldQuaternion;
+        [UnityEngine.HideInInspector]
+        public Unity.Mathematics.float2 targetPosition;
+        [UnityEngine.HideInInspector]
+        public int rendererIndex;
+        [UnityEngine.HideInInspector]
+        public int animationIndex;
     }
 
     /// <summary>

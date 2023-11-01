@@ -33,7 +33,7 @@ namespace Nebukam.ORCA
 
         public NativeArray<AgentData> m_inputAgents; //Not Read-only : we may need to re-order it.
         public NativeArray<AgentTreeNode> m_outputTree;
-
+        [BurstCompile]
         public void Execute()
         {
             int agentCount = m_inputAgents.Length;
@@ -53,7 +53,6 @@ namespace Nebukam.ORCA
         /// <param name="node">The current agent k-D tree node index.</param>
         private void BuildAgentTreeRecursive(int begin, int end, int node)
         {
-
             AgentTreeNode treeNode = m_outputTree[node];
             AgentData agent = m_inputAgents[begin];
             float2 pos;
@@ -113,7 +112,7 @@ namespace Nebukam.ORCA
                 {
                     ++leftSize;
                     ++left;
-                    ++right;
+                    //++right;
                 }
 
                 treeNode.left = node + 1;

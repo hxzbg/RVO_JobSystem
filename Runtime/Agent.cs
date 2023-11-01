@@ -38,7 +38,7 @@ namespace Nebukam.ORCA
         /// Simulated, collision-free velocity.
         /// </summary>
         float3 velocity { get; set; }
-
+        float3 targetPosition { get; set; }
         /// <summary>
         /// Height of the agent.
         /// </summary>
@@ -104,7 +104,6 @@ namespace Nebukam.ORCA
         /// This property has precedence over layers.
         /// </summary>
         bool collisionEnabled { get; set; }
-
     }
 
     public class Agent : Vertex, IAgent
@@ -116,7 +115,10 @@ namespace Nebukam.ORCA
 
         protected internal float3 m_prefVelocity = float3(0f);
         protected internal float3 m_velocity { get; set; } = float3(0f);
-
+        protected internal quaternion m_rotation = Unity.Mathematics.quaternion.identity;
+        protected internal float3 m_targetPosition = float3(0f);
+        protected internal int m_rendererIndex = 0;
+        protected internal int m_animationIndex = 0;
         protected internal float m_height = 0.5f;
         protected internal float m_radius = 0.5f;
         protected internal float m_radiusObst = 0.5f;
@@ -137,7 +139,14 @@ namespace Nebukam.ORCA
         /// 
         /// Properties
         /// 
-
+        public int animationIndex { get => m_animationIndex; set => m_animationIndex = value; }
+        public int rendererIndex { get => m_rendererIndex; set => m_rendererIndex = value; }
+        public float3 targetPosition { get => m_targetPosition; set => m_targetPosition = value; }
+        public quaternion rotation
+        {
+            get => m_rotation;
+            set => m_rotation = value;
+        }
         /// <summary>
         /// Preferred velocity of the agent.
         /// This is the 'ideal', desired velocity.

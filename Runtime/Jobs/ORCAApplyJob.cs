@@ -41,28 +41,37 @@ namespace Nebukam.ORCA
         public NativeArray<AgentDataResult> m_inputAgentResults;
 
         public NativeArray<AgentData> m_inputAgents;
-
+        [BurstCompile]
         public void Execute(int index)
         {
 
             AgentDataResult result = m_inputAgentResults[index];
             AgentData agent = m_inputAgents[index];
             float3 worldPosition = agent.worldPosition, worldVelocity = agent.worldVelocity;
-
+            Unity.Mathematics.quaternion worldQuaternion = agent.worldQuaternion;
             if (m_plane == AxisPair.XY)
             {
                 worldPosition = float3(result.position, worldPosition.z);
                 worldVelocity = float3(result.velocity, worldVelocity.z);
+                if (math.lengthsq(worldVelocity) > float.Epsilon)
+                {
+                    worldQuaternion = Unity.Mathematics.quaternion.LookRotation(normalize(worldVelocity), float3(0, 0, 1));
+                }
             }
             else
             {
                 worldPosition = float3(result.position.x, worldPosition.y, result.position.y);
                 worldVelocity = float3(result.velocity.x, worldVelocity.y, result.velocity.y);
+                if (math.lengthsq(worldVelocity) > float.Epsilon)
+                {
+                    worldQuaternion = Unity.Mathematics.quaternion.LookRotation(normalize(worldVelocity), float3(0, 1, 0));
+                }
             }
 
             agent.position = result.position;
             agent.worldPosition = worldPosition;
             agent.worldVelocity = worldVelocity;
+            agent.worldQuaternion = worldQuaternion;
             m_inputAgents[index] = agent;
 
         }

@@ -76,7 +76,7 @@ namespace Nebukam.ORCA
 
         public NativeArray<AgentDataResult> m_results;
         public float m_timestep;
-
+        [BurstCompile]
         public void Execute(int index)
         {
 
@@ -90,6 +90,10 @@ namespace Nebukam.ORCA
                 m_results[index] = result;
                 return;
             }
+
+            float mspd = agent.maxSpeed; // max(minSpeed + (i + 1) * 0.5f, maxSpeed);
+            float agentSpeed = mspd * min(1f, distance(agent.position, agent.targetPosition) / mspd);
+            agent.prefVelocity = normalize(agent.targetPosition - agent.position) * agentSpeed;
 
             AgentData otherAgent;
                         

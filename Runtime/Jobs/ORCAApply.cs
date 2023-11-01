@@ -82,8 +82,9 @@ namespace Nebukam.ORCA
                 agent = agentList[agentData.index];
                 agent.pos = agentData.worldPosition;
                 agent.velocity = agentData.worldVelocity;
+                agent.rotation = agentData.worldQuaternion;
             }
-
+            
         }
 
     }
