@@ -19,16 +19,16 @@
 // SOFTWARE.
 
 using Unity.Burst;
+using Unity.Entities;
 using Unity.Mathematics;
 
 namespace Nebukam.ORCA
 {
-
     /// <summary>
     /// Job-friendly Agent data.
     /// </summary>
     [BurstCompile]
-    public struct AgentData
+    public struct AgentData : IComponentData
     {
         public int index;
         public int kdIndex;
@@ -57,6 +57,37 @@ namespace Nebukam.ORCA
 
         public float3 worldPosition;
         public float3 worldVelocity;
+
+        public static void Init(ref AgentData data)
+        {
+            data.index = -1;
+            data.kdIndex = -1;
+
+            data.position = float2.zero;
+            data.baseline = 0f;
+            data.prefVelocity = float2.zero;
+            data.velocity = float2.zero;
+
+            data.height = 0.5f;
+            data.radius = 0.5f;
+            data.radiusObst = 0.5f;
+            data.maxSpeed = 20f;
+
+            data.maxNeighbors = 15;
+            data.neighborDist = 20.0f;
+            data.neighborElev = 0.5f;
+
+            data.timeHorizon = 15.0f;
+            data.timeHorizonObst = 1.2f;
+
+            data.layerOccupation = ORCALayer.ANY;
+            data.layerIgnore = ORCALayer.NONE;
+            data.navigationEnabled = true;
+            data.collisionEnabled = true;
+
+            data.worldPosition = float3.zero;
+            data.worldVelocity = float3.zero;
+        }
     }
 
     /// <summary>
@@ -65,10 +96,7 @@ namespace Nebukam.ORCA
     [BurstCompile]
     public struct AgentDataResult
     {
-
         public float2 position;
         public float2 velocity;
-
     }
-
 }

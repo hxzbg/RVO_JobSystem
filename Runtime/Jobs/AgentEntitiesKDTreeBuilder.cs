@@ -24,39 +24,13 @@ using Unity.Burst;
 
 namespace Nebukam.ORCA
 {
-
     [BurstCompile]
-    public class AgentKDTreeBuilder : ProcessorChain, IPlanar
+    public class AgentEntitiesKDTreeBuilder : AgentKDTreeBuilder
     {
-
-        #region IPlanar
-
-        protected AxisPair m_plane = AxisPair.XY;
-        public AxisPair plane
+        protected override void Initialization()
         {
-            get { return m_plane; }
-            set { m_plane = m_agentProvider.plane = value; }
-        }
-
-        #endregion
-
-        protected AgentProvider m_agentProvider;
-        protected AgentKDTree m_agentKDTreeProvider;
-
-        public IAgentGroup<IAgent> agents { 
-            get { return m_agentProvider.agents; } 
-            set { m_agentProvider.agents = value; } 
-        }
-
-        public AgentKDTreeBuilder()
-        {
-            Initialization();
-        }
-
-        protected virtual void Initialization()
-        {
-            Add(ref m_agentProvider);
-            Add(ref m_agentKDTreeProvider);
+            m_agentProvider = new AgentEntitiesProvider();
+            base.Initialization();
         }
     }
 }

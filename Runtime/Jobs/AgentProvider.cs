@@ -38,7 +38,11 @@ namespace Nebukam.ORCA
 
     public class AgentProvider : Processor<Unemployed>, IAgentProvider, IPlanar
     {
+        public AgentProvider()
+        {
 
+        }
+        
         public AxisPair plane { get; set; } = AxisPair.XY;
 
         protected IAgentGroup<IAgent> m_agents = null;

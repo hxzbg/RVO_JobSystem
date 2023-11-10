@@ -20,6 +20,7 @@
 
 using Nebukam.JobAssist;
 using Nebukam.Common;
+using UnityEngine.PlayerLoop;
 
 namespace Nebukam.ORCA
 {
@@ -88,7 +89,11 @@ namespace Nebukam.ORCA
 
         public ORCA()
         {
+            Initialization();
+        }
 
+        protected virtual void Initialization()
+        { 
             // Preparation
             Add(ref m_dynamicObstacles);
             Add(ref m_staticObstacles);
@@ -104,8 +109,8 @@ namespace Nebukam.ORCA
 
             Add(ref m_raycasts);
             m_raycasts.chunkSize = 5;
-
         }
+
 
         protected override void Apply()
         {

@@ -20,43 +20,18 @@
 
 using Nebukam.JobAssist;
 using Nebukam.Common;
-using Unity.Burst;
+using UnityEditor.UI;
 
 namespace Nebukam.ORCA
 {
-
-    [BurstCompile]
-    public class AgentKDTreeBuilder : ProcessorChain, IPlanar
+    public class ORCAEntities : ORCA
     {
-
-        #region IPlanar
-
-        protected AxisPair m_plane = AxisPair.XY;
-        public AxisPair plane
-        {
-            get { return m_plane; }
-            set { m_plane = m_agentProvider.plane = value; }
-        }
-
-        #endregion
-
-        protected AgentProvider m_agentProvider;
-        protected AgentKDTree m_agentKDTreeProvider;
-
-        public IAgentGroup<IAgent> agents { 
-            get { return m_agentProvider.agents; } 
-            set { m_agentProvider.agents = value; } 
-        }
-
-        public AgentKDTreeBuilder()
-        {
-            Initialization();
-        }
-
-        protected virtual void Initialization()
-        {
-            Add(ref m_agentProvider);
-            Add(ref m_agentKDTreeProvider);
+        protected override void Initialization()
+        { 
+            m_agents = new AgentEntitiesKDTreeBuilder();
+            m_orcaApply = new ORCAEntitiesApply();
+            
+            base.Initialization();
         }
     }
 }

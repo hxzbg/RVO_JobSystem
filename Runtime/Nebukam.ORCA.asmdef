@@ -2,6 +2,7 @@
     "name": "Nebukam.ORCA",
     "references": [
         "Unity.Burst",
+		"Unity.Entities",
         "Unity.Collections",
         "Unity.Jobs",
         "Unity.Mathematics",
