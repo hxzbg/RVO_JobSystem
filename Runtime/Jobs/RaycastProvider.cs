@@ -28,7 +28,6 @@ using Nebukam.Common;
 
 namespace Nebukam.ORCA
 {
-
     public interface IRaycastProvider : IProcessor
     {
         NativeArray<RaycastData> outputRaycasts { get; }
@@ -37,7 +36,6 @@ namespace Nebukam.ORCA
 
     public class RaycastProvider : Processor<Unemployed>, IRaycastProvider
     {
-
         public AxisPair plane { get; set; } = AxisPair.XY;
 
         /// 
@@ -58,19 +56,16 @@ namespace Nebukam.ORCA
 
         protected override void InternalLock()
         {
-
             int count = m_raycasts == null ? 0 : m_raycasts.Count;
 
             m_lockedRaycasts.Clear();
             m_lockedRaycasts.Capacity = count;
 
             for (int i = 0; i < count; i++) { m_lockedRaycasts.Add(m_raycasts[i] as Raycast); }
-
         }
 
         protected override void Prepare(ref Unemployed job, float delta)
         {
-
             int raycastCount = m_lockedRaycasts.Count;
 
             MakeLength(ref m_outputRaycast, raycastCount);
@@ -120,7 +115,6 @@ namespace Nebukam.ORCA
                     };
                 }
             }
-
         }
 
         protected override void InternalDispose()
@@ -132,6 +126,5 @@ namespace Nebukam.ORCA
 
             m_outputRaycast.Release();
         }
-
     }
 }

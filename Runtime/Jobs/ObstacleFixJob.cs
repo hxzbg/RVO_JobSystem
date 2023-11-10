@@ -29,8 +29,6 @@ namespace Nebukam.ORCA
     [BurstCompile]
     public struct ObstacleFixJob : IJob
     {
-
-
         public bool m_recompute;
 
         [ReadOnly]

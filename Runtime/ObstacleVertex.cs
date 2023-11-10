@@ -24,14 +24,12 @@ using Nebukam.Common;
 
 namespace Nebukam.ORCA
 {
-
     /// <summary>
     /// A single Obstacle vertex.
     /// Used within ObjectGroup.
     /// </summary>
     public class ObstacleVertex : Vertex
     {
-
         protected internal float3 m_dir = float3(0f);
         /// <summary>
         /// Direction of the vertex in space
@@ -40,6 +38,5 @@ namespace Nebukam.ORCA
 
         public float2 dirXY { get { return float2(m_dir.x, m_dir.y); } }
         public float2 dirXZ { get { return float2(m_dir.x, m_dir.z); } }
-
     }
 }

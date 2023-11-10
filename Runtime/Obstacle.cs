@@ -22,14 +22,12 @@ using Nebukam.Common;
 
 namespace Nebukam.ORCA
 {
-
     /// <summary>
     /// Obstacle definition within an ORCA simulation.
     /// An Obstacle can be seen as an either open or closed polyline : it is a list of linked points in space
     /// </summary>
     public class Obstacle : PolyLine<ObstacleVertex>, IRequireInit
     {
-
         protected internal ORCALayer m_layerOccupation = ORCALayer.ANY;
         protected internal bool m_collisionEnabled = true;
         protected internal float m_thickness = 0.0f;
@@ -65,7 +63,6 @@ namespace Nebukam.ORCA
         /// </summary>
         public bool edge { get { return m_edge; } set { m_edge = value; } }
 
-
         public ObstacleInfos infos
         {
             get
@@ -92,7 +89,5 @@ namespace Nebukam.ORCA
             m_baseline = 0.0f;
             m_edge = false;
         }
-
     }
-
 }

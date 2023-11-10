@@ -23,7 +23,6 @@ using Unity.Mathematics;
 
 namespace Nebukam.ORCA
 {
-
     /// <summary>
     /// Job-friendly Agent data.
     /// </summary>
@@ -65,10 +64,7 @@ namespace Nebukam.ORCA
     [BurstCompile]
     public struct AgentDataResult
     {
-
         public float2 position;
         public float2 velocity;
-
     }
-
 }

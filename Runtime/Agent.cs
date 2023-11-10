@@ -24,10 +24,8 @@ using Nebukam.Common;
 
 namespace Nebukam.ORCA
 {
-
     public interface IAgent : IVertex
     {
-
         /// <summary>
         /// Preferred velocity of the agent.
         /// This is the 'ideal', desired velocity.
@@ -104,12 +102,10 @@ namespace Nebukam.ORCA
         /// This property has precedence over layers.
         /// </summary>
         bool collisionEnabled { get; set; }
-
     }
 
     public class Agent : Vertex, IAgent
     {
-
         /// 
         /// Fields
         /// 
@@ -267,5 +263,4 @@ namespace Nebukam.ORCA
             set { m_collisionEnabled = value; }
         }
     }
-
 }

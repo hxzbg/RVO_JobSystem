@@ -76,7 +76,6 @@ namespace Nebukam.ORCA
             m_staticObstacles.Clear(true);
             m_dynamicObstacles.Clear(true);
             m_raycasts.Clear(true);
-
         }
 
         public void Dispose()
@@ -88,6 +87,5 @@ namespace Nebukam.ORCA
         }
 
         #endregion
-
     }
 }

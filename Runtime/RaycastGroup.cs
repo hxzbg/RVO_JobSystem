@@ -23,7 +23,6 @@ using Nebukam.Common;
 
 namespace Nebukam.ORCA
 {
-
     public interface IRaycastGroup : IVertexGroup<Raycast>
     {
 

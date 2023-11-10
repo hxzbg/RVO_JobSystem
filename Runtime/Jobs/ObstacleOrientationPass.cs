@@ -22,11 +22,9 @@ using Nebukam.JobAssist;
 
 namespace Nebukam.ORCA
 {
-
     public class ObstacleOrientationPass<T> : ParallelProcessor<ObstacleOrientationJob>
         where T : class, IProcessor, IObstacleProvider
     {
-
         #region Inputs
 
         protected bool m_inputsDirty = true;
@@ -37,7 +35,6 @@ namespace Nebukam.ORCA
 
         protected override int Prepare(ref ObstacleOrientationJob job, float delta)
         {
-
             if (m_inputsDirty)
             {
 
@@ -56,8 +53,6 @@ namespace Nebukam.ORCA
             job.m_inputObstacles = m_obstaclesProvider.outputObstacles;
 
             return m_obstaclesProvider.outputObstacles.Length;
-
         }
-
     }
 }

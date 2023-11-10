@@ -28,7 +28,6 @@ using Nebukam.Common;
 
 namespace Nebukam.ORCA
 {
-
     public interface IAgentProvider : IProcessor
     {
         NativeArray<AgentData> outputAgents { get; }
@@ -38,7 +37,6 @@ namespace Nebukam.ORCA
 
     public class AgentProvider : Processor<Unemployed>, IAgentProvider, IPlanar
     {
-
         public AxisPair plane { get; set; } = AxisPair.XY;
 
         protected IAgentGroup<IAgent> m_agents = null;
@@ -56,7 +54,6 @@ namespace Nebukam.ORCA
 
         protected float m_maxRadius = 0f;
         public float maxRadius { get { return m_maxRadius; } }
-                
 
         protected override void InternalLock()
         {
@@ -67,12 +64,10 @@ namespace Nebukam.ORCA
             m_lockedAgents.Capacity = count;
 
             for (int i = 0; i < count; i++) { m_lockedAgents.Add(m_agents[i] as Agent); }
-
         }
 
         protected override void Prepare(ref Unemployed job, float delta)
         {
-
             int agentCount = m_lockedAgents.Count;
 
             MakeLength(ref m_outputAgents, agentCount);
@@ -151,7 +146,6 @@ namespace Nebukam.ORCA
                     };
                 }
             }
-
         }
 
         protected override void InternalDispose()
@@ -163,6 +157,5 @@ namespace Nebukam.ORCA
 
             m_outputAgents.Release();
         }
-
     }
 }

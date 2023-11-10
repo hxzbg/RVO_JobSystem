@@ -26,11 +26,9 @@ using static Unity.Mathematics.math;
 
 namespace Nebukam.ORCA
 {
-
     [BurstCompile]
     public struct ObstacleKDTreeJob : IJob
     {
-
         private const float EPSILON = 0.00001f;
 
         public bool m_recompute;
@@ -67,7 +65,6 @@ namespace Nebukam.ORCA
         /// <param name="node">The current agent k-D tree node index.</param>
         private void BuildAgentTreeRecursive(int begin, int end, int node)
         {
-
             ObstacleTreeNode treeNode = m_outputTree[node];
             ObstacleVertexData obstacle = m_inputObstacles[begin];
             float2 pos;
@@ -153,6 +150,5 @@ namespace Nebukam.ORCA
         {
             return a.x * b.y - a.y * b.x;
         }
-
     }
 }

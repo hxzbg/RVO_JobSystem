@@ -24,13 +24,11 @@ using Unity.Mathematics;
 
 namespace Nebukam.ORCA
 {
-
     /// <summary>
     /// Interface for an ObstacleGroup. Only expose the methods required by the simulation.
     /// </summary>
     public interface IObstacleGroup
     {
-
         /// <summary>
         /// Number of Obstacle currently in the group.
         /// </summary>
@@ -41,7 +39,6 @@ namespace Nebukam.ORCA
         /// <param name="i">Index of the obstacle to be retreived</param>
         /// <returns></returns>
         Obstacle this[int i] { get; }
-
     }
 
     /// <summary>
@@ -50,7 +47,6 @@ namespace Nebukam.ORCA
     /// </summary>
     public class ObstacleGroup : IObstacleGroup
     {
-
         protected Pool.OnItemReleased m_onObstacleReleased;
 
         public ObstacleGroup()
@@ -181,6 +177,5 @@ namespace Nebukam.ORCA
 
             m_obstacles.Clear();
         }
-
     }
 }

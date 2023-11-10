@@ -88,7 +88,11 @@ namespace Nebukam.ORCA
 
         public ORCA()
         {
+            Initialize();
+        }
 
+        protected virtual void Initialize()
+        {
             // Preparation
             Add(ref m_dynamicObstacles);
             Add(ref m_staticObstacles);
@@ -104,7 +108,6 @@ namespace Nebukam.ORCA
 
             Add(ref m_raycasts);
             m_raycasts.chunkSize = 5;
-
         }
 
         protected override void Apply()

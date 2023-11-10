@@ -28,11 +28,9 @@ using static Unity.Mathematics.math;
 
 namespace Nebukam.ORCA
 {
-
     [BurstCompile]
     public struct Segment2D
     {
-
         public static Segment2D zero = new Segment2D();
 
         public float2 A, B;
@@ -56,7 +54,6 @@ namespace Nebukam.ORCA
         /// <returns></returns>
         public bool IsIntersecting(Segment2D segment)
         {
-
             float2 A2 = segment.A, B2 = segment.B;
 
             var d = (B.x - A.x) * (B2.y - A2.y) - (B.y - A.y) * (B2.x - A2.x);
@@ -75,7 +72,6 @@ namespace Nebukam.ORCA
 
         public bool IsIntersecting(Segment2D segment, out float2 intersection)
         {
-
             intersection = float2(0f);
             float2 A2 = segment.A, B2 = segment.B;
 
@@ -95,13 +91,11 @@ namespace Nebukam.ORCA
 
             return true;
         }
-
     }
 
     [BurstCompile]
     public struct RaycastsJob : IJobParallelFor
     {
-
         const float EPSILON = 0.00001f;
 
         [ReadOnly]
@@ -745,6 +739,5 @@ namespace Nebukam.ORCA
         }
 
         #endregion
-
     }
 }

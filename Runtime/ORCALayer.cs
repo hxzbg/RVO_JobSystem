@@ -20,7 +20,6 @@
 
 namespace Nebukam.ORCA
 {
-
     /*
      Bitwise with flags :
 
@@ -83,5 +82,4 @@ namespace Nebukam.ORCA
         L24 | L25 | L26 | L27 |
         L28 | L29 | L30
     }
-
 }

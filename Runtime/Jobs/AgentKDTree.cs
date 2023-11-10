@@ -25,7 +25,6 @@ using Unity.Burst;
 
 namespace Nebukam.ORCA
 {
-
     [BurstCompile]
     public struct AgentTreeNode
     {
@@ -49,8 +48,6 @@ namespace Nebukam.ORCA
     [BurstCompile]
     public class AgentKDTree : Processor<AgentKDTreeJob>, IAgentKDTreeProvider
     {
-
-
         protected NativeArray<AgentTreeNode> m_outputTree = default;
         public NativeArray<AgentTreeNode> outputTree { get { return m_outputTree; } }
 
@@ -65,7 +62,6 @@ namespace Nebukam.ORCA
 
         protected override void Prepare(ref AgentKDTreeJob job, float delta)
         {
-
             if (m_inputsDirty)
             {
 
@@ -75,7 +71,6 @@ namespace Nebukam.ORCA
                 }
 
                 m_inputsDirty = false;
-
             }
 
             int agentCount = 2 * m_agentProvider.outputAgents.Length;
@@ -84,13 +79,11 @@ namespace Nebukam.ORCA
 
             job.m_inputAgents = m_agentProvider.outputAgents;
             job.m_outputTree = m_outputTree;
-
         }
 
         protected override void InternalDispose()
         {
             m_outputTree.Release();
         }
-
     }
 }

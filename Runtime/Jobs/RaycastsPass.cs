@@ -29,7 +29,6 @@ namespace Nebukam.ORCA
 {
     public class RaycastsPass : ParallelProcessor<RaycastsJob>
     {
-
         public AxisPair plane { get; set; } = AxisPair.XY;
 
         protected NativeArray<RaycastResult> m_results = default;
@@ -64,10 +63,8 @@ namespace Nebukam.ORCA
 
         protected override int Prepare(ref RaycastsJob job, float delta)
         {
-
             if (m_inputsDirty)
             {
-
                 if (!TryGetFirstInCompound(out m_raycastProvider, true)
                     || !TryGetFirstInCompound(out m_agentProvider, true)
                     || !TryGetFirstInCompound(out m_agentKDTreeProvider, true)
@@ -90,7 +87,6 @@ namespace Nebukam.ORCA
                 }
 
                 m_inputsDirty = false;
-
             }
 
             int rayCount = m_raycastProvider.outputRaycasts.Length;
@@ -120,7 +116,6 @@ namespace Nebukam.ORCA
             job.m_results = m_results;
 
             return rayCount;
-
         }
 
         protected override void Apply(ref RaycastsJob job)
@@ -171,8 +166,10 @@ namespace Nebukam.ORCA
                     ray.m_anyHit = true;
 
                 }
-                else{ ray.obstacleHit = null; }
-
+                else
+                {
+                    ray.obstacleHit = null;
+                }
             }
         }
 
@@ -180,6 +177,5 @@ namespace Nebukam.ORCA
         {
             m_results.Release();
         }
-
     }
 }

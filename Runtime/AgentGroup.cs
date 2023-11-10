@@ -22,7 +22,6 @@ using Nebukam.Common;
 
 namespace Nebukam.ORCA
 {
-
     /// <summary>
     /// Interface for an AgentGroup. Only exposes the methods required by the simulation.
     /// </summary>
@@ -41,7 +40,6 @@ namespace Nebukam.ORCA
     public class AgentGroup<V> : VertexGroup<V>, IAgentGroup<V>
         where V : Agent, IAgent, new()
     {
-
         protected override void OnVertexAdded(V v)
         {
             base.OnVertexAdded(v);

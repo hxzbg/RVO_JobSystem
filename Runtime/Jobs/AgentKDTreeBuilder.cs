@@ -50,10 +50,13 @@ namespace Nebukam.ORCA
 
         public AgentKDTreeBuilder()
         {
+            Initialize();
+        }
+
+        protected virtual void Initialize()
+        {
             Add(ref m_agentProvider);
             Add(ref m_agentKDTreeProvider);
         }
-
     }
-
 }

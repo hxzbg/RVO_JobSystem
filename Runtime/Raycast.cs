@@ -25,7 +25,6 @@ using Nebukam.Common;
 
 namespace Nebukam.ORCA
 {
-
     /// <summary>
     /// Defines which type of object the raycast should include in its checks.
     /// </summary>
@@ -75,7 +74,6 @@ namespace Nebukam.ORCA
         public float2 hitObstacleLocation2D;
         public int ObstacleVertexA;
         public int ObstacleVertexB;
-
     }
 
     /// <summary>
@@ -83,7 +81,6 @@ namespace Nebukam.ORCA
     /// </summary>
     public class Raycast : Vertex, IRequireCleanUp
     {
-
         protected internal float3 m_dir = float3(0f);
         protected internal ORCALayer m_layerIgnore = ORCALayer.NONE;
         protected internal RaycastFilter m_filter = RaycastFilter.ANY;
@@ -152,8 +149,5 @@ namespace Nebukam.ORCA
             obstacleHit = null;
             agentHit = null;
         }
-
     }
-
-
 }

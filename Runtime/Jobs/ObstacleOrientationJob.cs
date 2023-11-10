@@ -31,7 +31,6 @@ namespace Nebukam.ORCA
     [BurstCompile]
     public struct ObstacleOrientationJob : IJobParallelFor
     {
-
         public bool m_recompute;
 
         [ReadOnly]
@@ -43,7 +42,6 @@ namespace Nebukam.ORCA
 
         public void Execute(int index)
         {
-
             if (!m_recompute) { return; }
 
             //Compute whether a vertex is convex or concave
@@ -68,7 +66,6 @@ namespace Nebukam.ORCA
 
             v.dir = normalize(nextPos - pos);
             m_referenceObstacles[index] = v;
-
         }
 
         private float LeftOf(float2 a, float2 b, float2 c)
@@ -76,6 +73,5 @@ namespace Nebukam.ORCA
             float x1 = a.x - c.x, y1 = a.y - c.y, x2 = b.x - a.x, y2 = b.y - a.y;
             return x1 * y2 - y1 * x2;
         }
-
     }
 }

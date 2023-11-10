@@ -27,7 +27,6 @@ using static Unity.Mathematics.math;
 
 namespace Nebukam.ORCA
 {
-
     public struct DVP
     {
         public float distSq;
@@ -48,7 +47,6 @@ namespace Nebukam.ORCA
     [BurstCompile]
     public struct ORCALinesJob : IJobParallelFor
     {
-
         const float EPSILON = 0.00001f;
 
         [ReadOnly]
@@ -79,7 +77,6 @@ namespace Nebukam.ORCA
 
         public void Execute(int index)
         {
-
             AgentData agent = m_inputAgents[index];
             AgentDataResult result = new AgentDataResult();
 
@@ -1277,6 +1274,5 @@ namespace Nebukam.ORCA
         }
 
         #endregion
-
     }
 }

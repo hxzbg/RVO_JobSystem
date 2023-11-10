@@ -25,7 +25,6 @@ using Nebukam.Common;
 
 namespace Nebukam.ORCA
 {
-
     public interface IObstacleProvider : IProcessor, IPlanar
     {
         IObstacleGroup obstacles { get; set; }
@@ -41,7 +40,6 @@ namespace Nebukam.ORCA
 
     public class ObstacleProvider : Processor<Unemployed>, IObstacleProvider
     {
-
         public AxisPair plane { get; set; } = AxisPair.XY;
 
         /// 
@@ -201,7 +199,6 @@ namespace Nebukam.ORCA
                             };
                             m_referenceObstacles[index++] = oData;
                         }
-
                     }
 
                     gIndex += vCount;
@@ -209,8 +206,6 @@ namespace Nebukam.ORCA
             }
 
             m_referenceObstacles.CopyTo(m_outputObstacles);
-
-
         }
 
         protected override void Apply(ref Unemployed job)
@@ -225,7 +220,6 @@ namespace Nebukam.ORCA
             m_referenceObstacles.Release();
             m_outputObstacles.Release();
         }
-
     }
 
     public class StaticObstacleProvider : ObstacleProvider, IStaticObstacleProvider { }
@@ -237,6 +231,4 @@ namespace Nebukam.ORCA
             base.Prepare(ref job, delta);
         }
     }
-
-
 }

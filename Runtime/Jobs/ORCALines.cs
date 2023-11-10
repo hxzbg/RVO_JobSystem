@@ -25,7 +25,6 @@ using Nebukam.Common;
 
 namespace Nebukam.ORCA
 {
-
     public interface IORCALinesProvider : IProcessor
     {
         IAgentProvider agentProvider { get; }
@@ -34,7 +33,6 @@ namespace Nebukam.ORCA
 
     public class ORCALines : ParallelProcessor<ORCALinesJob>, IORCALinesProvider
     {
-
         public AxisPair plane { get; set; } = AxisPair.XY;
 
         protected NativeArray<AgentDataResult> m_results = default;
@@ -67,7 +65,6 @@ namespace Nebukam.ORCA
 
         protected override int Prepare(ref ORCALinesJob job, float delta)
         {
-
             if (m_inputsDirty)
             {
 
@@ -92,7 +89,6 @@ namespace Nebukam.ORCA
                 }
 
                 m_inputsDirty = false;
-
             }
 
             int agentCount = m_agentProvider.outputAgents.Length;
@@ -119,7 +115,6 @@ namespace Nebukam.ORCA
             job.m_timestep = delta;
 
             return agentCount;
-
         }
 
         protected override void Apply(ref ORCALinesJob job)
@@ -159,6 +154,5 @@ namespace Nebukam.ORCA
         {
             m_results.Release();
         }
-
     }
 }

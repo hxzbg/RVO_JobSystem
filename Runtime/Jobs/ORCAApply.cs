@@ -25,14 +25,12 @@ using Nebukam.Common;
 
 namespace Nebukam.ORCA
 {
-
     /// <summary>
     /// Applies computed simulation result
     /// and update Agent's position and velocity
     /// </summary>
     public class ORCAApply : ParallelProcessor<ORCAApplyJob>
     {
-
         public AxisPair plane { get; set; } = AxisPair.XY;
 
         #region Inputs
@@ -45,7 +43,6 @@ namespace Nebukam.ORCA
 
         protected override int Prepare(ref ORCAApplyJob job, float delta)
         {
-
             if (m_inputsDirty)
             {
 
@@ -64,12 +61,10 @@ namespace Nebukam.ORCA
             job.m_timestep = delta;
 
             return m_orcaResultProvider.results.Length;
-
         }
 
         protected override void Apply(ref ORCAApplyJob job)
         {
-
             IAgentProvider agentProvider = m_orcaResultProvider.agentProvider;
             NativeArray<AgentData> agentDataList = agentProvider.outputAgents;
             List<Agent> agentList = agentProvider.lockedAgents;
@@ -83,8 +78,6 @@ namespace Nebukam.ORCA
                 agent.pos = agentData.worldPosition;
                 agent.velocity = agentData.worldVelocity;
             }
-
         }
-
     }
 }

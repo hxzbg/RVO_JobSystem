@@ -53,6 +53,11 @@ namespace Nebukam.ORCA
 
         public ObstacleKDTreeBuilder()
         {
+            Initialize();
+        }
+
+        protected virtual void Initialize()
+        {
             Add(ref m_obstacleProvider); //Create base obstacle structure
             Add(ref m_orientation); //Compute obstacle direction & type (convex/concave)
             m_orientation.chunkSize = 64;
@@ -60,7 +65,5 @@ namespace Nebukam.ORCA
             Add(ref m_fix);
             Add(ref m_kdTree); //Compute & split actual KDTree
         }
-
     }
-
 }

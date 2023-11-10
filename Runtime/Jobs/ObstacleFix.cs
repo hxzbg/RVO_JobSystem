@@ -22,7 +22,6 @@ using Nebukam.JobAssist;
 
 namespace Nebukam.ORCA
 {
-
     public class ObstacleFix<T> : Processor<ObstacleFixJob>
         where T : class, IProcessor, IObstacleProvider
     {
@@ -35,27 +34,20 @@ namespace Nebukam.ORCA
 
         #endregion
 
-
         protected override void Prepare(ref ObstacleFixJob job, float delta)
         {
-
             if (m_inputsDirty)
             {
-                
                 if (!TryGetFirstInCompound(out m_obstaclesProvider, true))
                 {
                     throw new System.Exception("No IObstacleProvider or IObstacleSplitProvider in chain !");
                 }
-
                 m_inputsDirty = false;
-
             }
 
             job.m_recompute = m_obstaclesProvider.recompute;
             job.m_referenceObstacles = m_obstaclesProvider.referenceObstacles;
             job.m_inputObstacles = m_obstaclesProvider.outputObstacles;
-
         }
-
     }
 }

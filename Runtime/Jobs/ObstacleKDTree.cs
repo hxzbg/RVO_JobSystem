@@ -25,7 +25,6 @@ using Unity.Burst;
 
 namespace Nebukam.ORCA
 {
-
     [BurstCompile]
     public struct ObstacleTreeNode
     {
