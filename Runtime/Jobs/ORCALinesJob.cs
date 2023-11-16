@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using PlasticGui.Diff;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
@@ -79,7 +80,7 @@ namespace Nebukam.ORCA
         {
             AgentData agent = m_inputAgents[index];
             AgentDataResult result = new AgentDataResult();
-
+            result.agent_selected = -1;
             if (agent.maxNeighbors == 0 || !agent.navigationEnabled)
             {
                 result.position = agent.position;
@@ -659,13 +660,16 @@ namespace Nebukam.ORCA
 
             #region agents
 
+            DVP target = new DVP(float.MaxValue, -1);
             NativeList<DVP> agentNeighbors = new NativeList<DVP>(agent.maxNeighbors, Allocator.Temp);
 
             QueryAgentTreeRecursive(
                 ref a_position, 
                 ref agent, 
                 ref rangeSq, 0, 
-                ref agentNeighbors);
+                ref agentNeighbors,
+                ref target
+            );
 
             float invTimeHorizon = 1.0f / a_timeHorizon;
 
@@ -755,6 +759,7 @@ namespace Nebukam.ORCA
 
             result.velocity = a_newVelocity;
             result.position = a_position + a_newVelocity * m_timestep;
+            result.agent_selected = target.index;
 
             m_results[index] = result;
 
@@ -772,9 +777,9 @@ namespace Nebukam.ORCA
         /// <param name="rangeSq">The squared range around the agent.</param>
         /// <param name="node">The current agent k-D tree node index.</param>
         /// <param name="agentNeighbors">The list of neighbors to be filled up.</param>
-        private void QueryAgentTreeRecursive(ref float2 center, ref AgentData agent, ref float rangeSq, int node, ref NativeList<DVP> agentNeighbors)
+        private void QueryAgentTreeRecursive(ref float2 center, ref AgentData agent, ref float rangeSq, int node, ref NativeList<DVP> agentNeighbors, ref DVP target)
         {
-
+            int selectMask = agent.selector >> 16;
             AgentTreeNode treeNode = m_inputAgentTree[node];
 
             if (treeNode.end - treeNode.begin <= AgentTreeNode.MAX_LEAF_SIZE)
@@ -793,7 +798,16 @@ namespace Nebukam.ORCA
                         continue;
                     }
 
+                    //select target
                     float distSq = lengthsq(center - a.position);
+                    if(selectMask != 0 && (selectMask & a.selector) != 0)
+                    {
+                        if (target.index < 0 || distSq < target.distSq)
+                        {
+                            target.index = a.index;
+                            target.distSq = distSq;
+                        }
+                    }
 
                     if (distSq < rangeSq)
                     {
@@ -817,12 +831,10 @@ namespace Nebukam.ORCA
                             rangeSq = agentNeighbors[agentNeighbors.Length - 1].distSq;
                         }
                     }
-
                 }
             }
             else
             {
-
                 AgentTreeNode leftNode = m_inputAgentTree[treeNode.left], rightNode = m_inputAgentTree[treeNode.right];
 
                 float distSqLeft = lengthsq(max(0.0f, leftNode.minX - center.x))
@@ -838,11 +850,11 @@ namespace Nebukam.ORCA
                 {
                     if (distSqLeft < rangeSq)
                     {
-                        QueryAgentTreeRecursive(ref center, ref agent, ref rangeSq, treeNode.left, ref agentNeighbors);
+                        QueryAgentTreeRecursive(ref center, ref agent, ref rangeSq, treeNode.left, ref agentNeighbors, ref target);
 
                         if (distSqRight < rangeSq)
                         {
-                            QueryAgentTreeRecursive(ref center, ref agent, ref rangeSq, treeNode.right, ref agentNeighbors);
+                            QueryAgentTreeRecursive(ref center, ref agent, ref rangeSq, treeNode.right, ref agentNeighbors, ref target);
                         }
                     }
                 }
@@ -850,11 +862,11 @@ namespace Nebukam.ORCA
                 {
                     if (distSqRight < rangeSq)
                     {
-                        QueryAgentTreeRecursive(ref center, ref agent, ref rangeSq, treeNode.right, ref agentNeighbors);
+                        QueryAgentTreeRecursive(ref center, ref agent, ref rangeSq, treeNode.right, ref agentNeighbors, ref target);
 
                         if (distSqLeft < rangeSq)
                         {
-                            QueryAgentTreeRecursive(ref center, ref agent, ref rangeSq, treeNode.left, ref agentNeighbors);
+                            QueryAgentTreeRecursive(ref center, ref agent, ref rangeSq, treeNode.left, ref agentNeighbors, ref target);
                         }
                     }
                 }

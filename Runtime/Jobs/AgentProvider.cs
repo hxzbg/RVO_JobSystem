@@ -90,6 +90,7 @@ namespace Nebukam.ORCA
                     {
                         index = i,
                         kdIndex = i,
+                        selector = a.m_selector,
                         position = float2(pos.x, pos.y), //
                         worldPosition = pos,
                         baseline = pos.z,
@@ -124,6 +125,7 @@ namespace Nebukam.ORCA
                     m_outputAgents[i] = new AgentData()
                     {
                         index = i,
+                        selector = a.m_selector,
                         position = float2(pos.x, pos.z), //
                         worldPosition = pos,
                         baseline = pos.y,
