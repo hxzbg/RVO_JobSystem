@@ -63,6 +63,8 @@ namespace Nebukam.ORCA
             agent.position = result.position;
             agent.worldPosition = worldPosition;
             agent.worldVelocity = worldVelocity;
+            agent.target = result.target;
+            agent.targetDistSq = result.targetDistSq;
             m_inputAgents[index] = agent;
         }
     }

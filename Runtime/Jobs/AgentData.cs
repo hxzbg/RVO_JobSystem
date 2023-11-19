@@ -32,7 +32,10 @@ namespace Nebukam.ORCA
         public int index;
         public int kdIndex;
 
-        public int selector;
+        public short camp;
+        public short targetCamp;
+        public int target;
+        public float targetDistSq;
 
         public float2 position;
         public float baseline;
@@ -66,7 +69,8 @@ namespace Nebukam.ORCA
     [BurstCompile]
     public struct AgentDataResult
     {
-        public int agent_selected;
+        public int target;
+        public float targetDistSq;
         public float2 position;
         public float2 velocity;
     }

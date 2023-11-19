@@ -80,7 +80,7 @@ namespace Nebukam.ORCA
         {
             AgentData agent = m_inputAgents[index];
             AgentDataResult result = new AgentDataResult();
-            result.agent_selected = -1;
+            result.target = -1;
             if (agent.maxNeighbors == 0 || !agent.navigationEnabled)
             {
                 result.position = agent.position;
@@ -759,7 +759,8 @@ namespace Nebukam.ORCA
 
             result.velocity = a_newVelocity;
             result.position = a_position + a_newVelocity * m_timestep;
-            result.agent_selected = target.index;
+            result.targetDistSq = target.distSq;
+            result.target = target.index;
 
             m_results[index] = result;
 
@@ -779,7 +780,7 @@ namespace Nebukam.ORCA
         /// <param name="agentNeighbors">The list of neighbors to be filled up.</param>
         private void QueryAgentTreeRecursive(ref float2 center, ref AgentData agent, ref float rangeSq, int node, ref NativeList<DVP> agentNeighbors, ref DVP target)
         {
-            int selectMask = agent.selector >> 16;
+            int targetCamp = agent.targetCamp;
             AgentTreeNode treeNode = m_inputAgentTree[node];
 
             if (treeNode.end - treeNode.begin <= AgentTreeNode.MAX_LEAF_SIZE)
@@ -800,7 +801,7 @@ namespace Nebukam.ORCA
 
                     //select target
                     float distSq = lengthsq(center - a.position);
-                    if(selectMask != 0 && (selectMask & a.selector) != 0)
+                    if(targetCamp != 0 && (targetCamp & a.camp) != 0)
                     {
                         if (target.index < 0 || distSq < target.distSq)
                         {

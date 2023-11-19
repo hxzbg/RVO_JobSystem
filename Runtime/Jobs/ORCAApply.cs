@@ -77,6 +77,16 @@ namespace Nebukam.ORCA
                 agent = agentList[agentData.index];
                 agent.pos = agentData.worldPosition;
                 agent.velocity = agentData.worldVelocity;
+                if(agentData.target >= 0)
+                {
+                    agent.target = agentList[agentData.target];
+                    agent.targetDistSq = agentData.targetDistSq;
+                }
+                else
+                {
+                    agent.target = null;
+                    agent.targetDistSq = float.MaxValue;
+                }
             }
         }
     }
