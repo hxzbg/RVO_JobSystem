@@ -21,6 +21,7 @@
 using Unity.Mathematics;
 using static Unity.Mathematics.math;
 using Nebukam.Common;
+using PlasticPipe.PlasticProtocol.Messages;
 
 namespace Nebukam.ORCA
 {
@@ -102,6 +103,13 @@ namespace Nebukam.ORCA
         /// This property has precedence over layers.
         /// </summary>
         bool collisionEnabled { get; set; }
+
+        short camp { get; set; }
+        short targetCamp { get; set; }
+
+        float targetDistSq { get; set; }
+
+        Agent target { get; set; }
     }
 
     public class Agent : Vertex, IAgent
@@ -129,6 +137,11 @@ namespace Nebukam.ORCA
         protected internal ORCALayer m_layerIgnore = ORCALayer.NONE;
         protected internal bool m_navigationEnabled = true;
         protected internal bool m_collisionEnabled = true;
+        protected internal short m_camp = 0;
+        protected internal short m_targetCamp = 0;
+
+        protected internal Agent m_target = null;
+        protected float m_targetDistSq = 0;
 
         /// 
         /// Properties
@@ -261,6 +274,30 @@ namespace Nebukam.ORCA
         {
             get { return m_collisionEnabled; }
             set { m_collisionEnabled = value; }
+        }
+
+        public short camp
+        {
+            get { return m_camp; }
+            set { m_camp = value; }
+        }
+
+        public short targetCamp
+        {
+            get { return m_targetCamp; }
+            set { m_targetCamp = value; }
+        }
+
+        public Agent target
+        {
+            get { return m_target; }
+            set { m_target = value; }
+        }
+
+        public float targetDistSq
+        {
+            get { return m_targetDistSq; }
+            set { m_targetDistSq = value; }
         }
     }
 }
